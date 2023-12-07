@@ -36,10 +36,10 @@ import PdfFullscreen from "./PdfFullscreen";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface PdfRendererProps {
-  fileURL: string;
+  url: string;
 }
 
-const PdfRenderer = ({ fileURL }: PdfRendererProps) => {
+const PdfRenderer = ({ url }: PdfRendererProps) => {
   const { toast } = useToast();
 
   const [numPages, setNumPages] = useState<number>();
@@ -71,12 +71,12 @@ const PdfRenderer = ({ fileURL }: PdfRendererProps) => {
   });
 
   const { width, ref } = useResizeDetector();
+  console.log(width);
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
     setCurrPage(Number(page));
     setValue("page", String(page));
   };
-  console.log(width);
 
   return (
     <div className="w-full bg-white rounded-md shadow flex flex-col items-center">
@@ -161,7 +161,7 @@ const PdfRenderer = ({ fileURL }: PdfRendererProps) => {
             <RotateCw className="h-4 w-4" />
           </Button>
 
-          <PdfFullscreen fileURL={fileURL} />
+          <PdfFullscreen fileUrl={url} />
         </div>
       </div>
 
@@ -182,7 +182,7 @@ const PdfRenderer = ({ fileURL }: PdfRendererProps) => {
                 });
               }}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-              file={fileURL}
+              file={url}
               className="max-h-full"
             >
               {isLoading && renderedScale ? (
@@ -197,7 +197,7 @@ const PdfRenderer = ({ fileURL }: PdfRendererProps) => {
 
               <Page
                 className={cn(isLoading ? "hidden" : "")}
-                width={width ? width : 1}
+                width={800}
                 pageNumber={currPage}
                 scale={scale}
                 rotate={rotation}

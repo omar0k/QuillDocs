@@ -12,10 +12,10 @@ import { useToast } from './ui/use-toast'
 import { useResizeDetector } from 'react-resize-detector'
 
 interface PdfFullscreenProps {
-  fileURL: string
+  fileUrl: string
 }
 
-const PdfFullscreen = ({ fileURL }: PdfFullscreenProps) => {
+const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [numPages, setNumPages] = useState<number>()
 
@@ -62,7 +62,7 @@ const PdfFullscreen = ({ fileURL }: PdfFullscreenProps) => {
               onLoadSuccess={({ numPages }) =>
                 setNumPages(numPages)
               }
-              file={fileURL}
+              file={fileUrl}
               className='max-h-full'>
               {new Array(numPages).fill(0).map((_, i) => (
                 <Page
