@@ -16,7 +16,7 @@ import { useToast } from "./ui/use-toast";
 import { useResizeDetector } from "react-resize-detector";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -69,8 +69,10 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
     },
     resolver: zodResolver(CustomPageValidator),
   });
-
-  const { width, ref } = useResizeDetector();
+  const targetRef = useRef(null);
+  const { width } = useResizeDetector({
+    targetRef: targetRef,
+  });
   console.log(width);
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
@@ -167,7 +169,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
 
       <div className="flex-1 w-full max-h-screen">
         <SimpleBar autoHide={false} className="max-h-[calc(100vh-10rem)]">
-          <div ref={ref}>
+          <div ref={targetRef}>
             <Document
               loading={
                 <div className="flex justify-center">
@@ -197,7 +199,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
 
               <Page
                 className={cn(isLoading ? "hidden" : "")}
-                width={800}
+                width={width ? width : 1}
                 pageNumber={currPage}
                 scale={scale}
                 rotate={rotation}
