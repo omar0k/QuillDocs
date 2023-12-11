@@ -16,7 +16,7 @@ const Navbar = async () => {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-            <span>DocMind</span>
+            <span>DocuWiz</span>
           </Link>
           {/* Add mobile navbar */}
           <div className="hidden items-center space-x-4 sm:flex">
