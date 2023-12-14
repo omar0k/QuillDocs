@@ -73,7 +73,6 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   const { width } = useResizeDetector({
     targetRef: targetRef,
   });
-  console.log(width);
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
     setCurrPage(Number(page));
