@@ -50,7 +50,7 @@
     "stripe": "^14.8.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^6.0.3",
+    "uploadthing": "^6.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
