@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { openai } from "@/lib/openai";
-import { PineconeClient } from "@/lib/pinecone";
+import { pinecone } from "@/lib/pinecone";
 import { SendMessageValidator } from "@/lib/validators/SendMessageValidator";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
@@ -40,7 +40,7 @@ export const POST = async (req: NextRequest) => {
     openAIApiKey: process.env.OPENAI_API_KEY,
   });
 
-  const pineconeIndex = PineconeClient.Index("docuwiz");
+  const pineconeIndex = pinecone.Index("docuwiz");
   //
   const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
     pineconeIndex,
