@@ -1,11 +1,11 @@
 import { db } from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { TRPCError } from "@trpc/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { pinecone } from "@/lib/pinecone";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
-import { PineconeClient } from "@/lib/pinecone";
+import { pinecone } from "@/lib/pinecone";
 import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
 const f = createUploadthing();
@@ -80,7 +80,7 @@ const onUploadComplete = async ({
       };
     }); // Vectorize and index entire document
 
-    const pineconeIndex = PineconeClient.Index("docuwiz");
+    const pineconeIndex = pinecone.Index("docuwiz");
 
     const embeddings = new OpenAIEmbeddings({
       openAIApiKey: process.env.OPENAI_API_KEY,
