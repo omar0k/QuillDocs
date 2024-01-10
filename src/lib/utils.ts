@@ -12,8 +12,8 @@ export function absoluteUrl(path: string) {
   return `http://localhost:${process.env.PORT ?? 3000}${path}`;
 }
 export function constructMetadata({
-  title = "DocuWiz - Chat with your PDFs",
-  description = "DocuWiz is an open-source software to make chatting your PDF files easy.",
+  title = "QuillDocs - Chat with your PDFs",
+  description = "QuillDocs is an open-source software to make chatting with your PDF files easy.",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false,

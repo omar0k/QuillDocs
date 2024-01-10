@@ -18,7 +18,7 @@ export default function Home() {
           seconds.
         </h1>
         <p className="mt-5 max-w-prose text-zinc-700 sm:text-xl">
-          DocuWiz allows you to have conversations with any PDF document. Simply
+          QuillDocs allows you to have conversations with any PDF document. Simply
           upload your file and start asking questions right away.
         </p>
         <Link
@@ -87,7 +87,7 @@ export default function Home() {
               Start chatting in minutes
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Chatting to your PDF files has never been easier than with DocuWiz
+              Chatting to your PDF files has never been easier than with QuillDocs
             </p>
           </div>
         </div>
