@@ -42,14 +42,12 @@ const onUploadComplete = async ({
       key: file.key,
       name: file.name,
       userId: metadata.userId,
-      url: `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`,
+      url: `${file.url}/${file.key}`,
       uploadStatus: "PROCESSING",
     },
   });
   try {
-    const response = await fetch(
-      `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`
-    );
+    const response = await fetch(`${file.url}/${file.key}`);
     const blob = await response.blob();
 
     const loader = new PDFLoader(blob);
@@ -58,12 +56,13 @@ const onUploadComplete = async ({
     const pagesAmt = pageLevelDocs.length;
     const { subscriptionPlan } = metadata;
     const { isSubscribed } = subscriptionPlan;
-    const isProExeeded =
+    const isProExceeded =
       pagesAmt > PLANS.find((plan) => plan.name === "Pro")!.pagesPerPdf;
-    const isFreeExeeded =
+    const isFreeExceeded =
       pagesAmt > PLANS.find((plan) => plan.name === "Free")!.pagesPerPdf;
 
-    if ((isSubscribed && isProExeeded) || (!isSubscribed && isFreeExeeded)) {
+    if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
+      console.log("we are here");
       await db.file.update({
         data: {
           uploadStatus: "FAILED",
@@ -99,7 +98,7 @@ const onUploadComplete = async ({
       },
     });
   } catch (err) {
-    console.error(err);
+    console.error(err, "upload error");
     await db.file.update({
       data: {
         uploadStatus: "FAILED",

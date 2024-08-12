@@ -72,8 +72,8 @@ const Dashboard = ({ subscriptionPlan }: PageProps) => {
                       {format(new Date(file.createdAt), "MMM yyyy")}
                     </div>
                     <div className="flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4" />
-                      mocked
+                      {/* <MessageSquare className="h-4 w-4" />
+                      {file.updatedAt} */}
                     </div>
                     <Button
                       onClick={() => deleteFile({ id: file.id })}

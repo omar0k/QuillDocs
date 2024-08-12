@@ -11,6 +11,15 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'gravatar.com',
+
+      },
+    ],  
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
